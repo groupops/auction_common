@@ -1,11 +1,9 @@
 package com.epam.training.auction.common;
 
-import java.util.Optional;
-
 /**
  * Created by Ahmed Magdy <ahmed_magdy@epam.com> on 28.10.15.
  */
-public final class UserTransferObject {
+public class UserTransferObject {
 
     private long id;
     private String username;
