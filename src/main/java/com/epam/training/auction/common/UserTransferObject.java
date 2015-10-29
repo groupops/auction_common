@@ -17,6 +17,12 @@ public final class UserTransferObject {
         this.password = password;
     }
 
+    public UserTransferObject(String username, String password){
+        this.id = 0;
+        this.username = username;
+        this.password = password;
+    }
+
     public long getId(){
         return id;
     }

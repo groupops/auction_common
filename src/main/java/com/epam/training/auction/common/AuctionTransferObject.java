@@ -19,8 +19,7 @@ public final class AuctionTransferObject {
 
     private int cachedHashCode = 0;
 
-    private AuctionTransferObject(long id, String title, UserTransferObject seller){
-        this.id = id;
+    private AuctionTransferObject(String title, UserTransferObject seller){
         this.title = title;
         this.seller = seller;
     }
@@ -57,6 +56,11 @@ public final class AuctionTransferObject {
         cachedHashCode +=  43 * this.getCreatedAt().hashCode();
         cachedHashCode +=  47 * this.getUpdatedAt().hashCode();
         return cachedHashCode;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Auction(id: %ld, title: %s, active: %s)", id, title, (isActive ? "Yes" : "No"));
     }
 
     public String getDescription() {
@@ -110,8 +114,8 @@ public final class AuctionTransferObject {
         private LocalDateTime updatedAt;
 
 
-        private AuctionBuilder(long id, String title, UserTransferObject seller){
-            this.id = id;
+        private AuctionBuilder(String title, UserTransferObject seller){
+            this.id = 0;
             this.title = title;
             this.description = "";
             this.isActive = true;
@@ -121,6 +125,12 @@ public final class AuctionTransferObject {
             this.createdAt = LocalDateTime.now();
             this.updatedAt = null;
         }
+
+        public AuctionBuilder setId(long id){
+            this.id = id;
+            return this;
+        }
+
         public AuctionBuilder setDescription(String description){
             this.description = description;
             return this;
@@ -152,7 +162,8 @@ public final class AuctionTransferObject {
         }
 
         public AuctionTransferObject build(){
-            AuctionTransferObject auction = new AuctionTransferObject(this.id, this.title, this.seller);
+            AuctionTransferObject auction = new AuctionTransferObject(this.title, this.seller);
+            auction.id = this.id;
             auction.description = this.description;
             auction.isActive = this.isActive;
             auction.winner = this.winner;
@@ -163,8 +174,8 @@ public final class AuctionTransferObject {
         }
     }
 
-    public static AuctionBuilder getBuilder(long id, String title, UserTransferObject seller) {
-        AuctionBuilder builder = new AuctionBuilder(id, title, seller);
+    public static AuctionBuilder getBuilder(String title, UserTransferObject seller) {
+        AuctionBuilder builder = new AuctionBuilder(title, seller);
         return builder;
     }
 }
