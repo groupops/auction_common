@@ -2,9 +2,21 @@ group 'com.epam.training.auction'
 version '1.0'
 
 apply plugin: 'java'
+apply plugin: 'org.sonarqube'
+apply plugin: "info.solidsoft.pitest"
+apply plugin: 'jacoco'
 apply plugin: 'maven'
 
-sourceCompatibility = 1.5
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath("org.sonarqube.gradle:gradle-sonarqube-plugin:1.0",
+                "info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.6")
+    }
+}
 
 repositories {
     mavenCentral()
@@ -12,4 +24,25 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+sonarqube {
+    properties {
+        property "sonar.host.url", sonarHostUrl
+        property "sonar.jdbc.url", sonarJdbcUrl
+        property "sonar.jdbc.driverClassName", driverClassName
+        property "sonar.jdbc.username", sonarJdbcUsername
+        property "sonar.jdbc.password", sonarJdbcPassword
+        property "sonar.login", sonarLogin
+        property "sonar.password", sonarPassword
+        property "sonar.pitest.reportsDirectory", pitestReportsDirectory
+        property "sonar.pitest.mode", pitestMode
+    }
+}
+
+pitest {
+    targetClasses = ['com.epam.training.*']
+    pitestVersion = "1.1.6"
+    threads = 4
+    outputFormats = ['XML', 'HTML']
 }
