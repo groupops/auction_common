@@ -1,12 +1,11 @@
 group 'com.epam.training.auction'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 apply plugin: 'java'
 apply plugin: 'org.sonarqube'
 apply plugin: "info.solidsoft.pitest"
 apply plugin: 'jacoco'
-
-sourceCompatibility = 1.5
+apply plugin: 'maven'
 
 buildscript {
     repositories {

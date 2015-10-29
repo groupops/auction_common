@@ -15,7 +15,7 @@ public class AuctionTransferObjectTest {
     public void checkIfBuilderBuildsValidAuction(){
         UserTransferObject seller = new UserTransferObject(1, "seller", "pass");
 
-        AuctionTransferObject target = AuctionTransferObject.getBuilder(ID, AUCTION_TITLE, seller).build();
+        AuctionTransferObject target = AuctionTransferObject.getBuilder(AUCTION_TITLE, seller).setId(ID).build();
         assertEquals("Id of auction was not set correctly", ID, target.getId());
         assertEquals("Title of auction was not set correctly", AUCTION_TITLE, target.getTitle());
         assertEquals("Seller of auction was not set correctly", seller, target.getSeller());
