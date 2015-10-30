@@ -10,6 +10,6 @@ public interface BiddingService extends Serializable {
 
     Optional<UserBidTransferObject> getMaxBid(long auctionId);
 
-    void bid(long auctionId, double bidPrice, long userId);
+    void bid(long auctionId, long bidPrice, long userId);
 
 }
