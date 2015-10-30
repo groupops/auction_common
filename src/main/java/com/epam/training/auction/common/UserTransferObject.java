@@ -1,11 +1,12 @@
 package com.epam.training.auction.common;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 /**
  * Created by Ahmed Magdy <ahmed_magdy@epam.com> on 28.10.15.
  */
-public final class UserTransferObject {
+public final class UserTransferObject implements Serializable {
 
     private long id;
     private String username;
@@ -41,8 +42,8 @@ public final class UserTransferObject {
         if (!(other instanceof UserTransferObject)) return false;
         UserTransferObject otherUser = (UserTransferObject)other;
         if (id != otherUser.id) return false;
-        if (!username.equals(otherUser.username)) return false;
-        if (!password.equals(otherUser.password)) return false;
+        if (!CommonUtils.areTwoObjectsEqual(username, otherUser.username)) return false;
+        if (!CommonUtils.areTwoObjectsEqual(password, otherUser.password)) return false;
         return true;
     }
 

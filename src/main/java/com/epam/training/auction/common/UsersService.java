@@ -1,11 +1,12 @@
 package com.epam.training.auction.common;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 /**
  * Created by Ahmed Magdy <ahmed_magdy@epam.com> on 29.10.15.
  */
-public interface UsersService {
+public interface UsersService extends Serializable {
     void addUser(UserTransferObject user);
 
     Optional<UserTransferObject> getUserByName(String userName);

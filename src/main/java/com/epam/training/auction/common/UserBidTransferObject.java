@@ -1,13 +1,15 @@
 package com.epam.training.auction.common;
 
+import java.io.Serializable;
+
 /**
  * Created by Ahmed Magdy <ahmed_magdy@epam.com> on 29.10.15.
  */
-public final class UserBid {
+public final class UserBidTransferObject implements Serializable {
     private UserTransferObject user;
     private double bid;
 
-    public UserBid(UserTransferObject user, double bid){
+    public UserBidTransferObject(UserTransferObject user, double bid){
         this.user = user;
         this.bid = bid;
     }
@@ -23,10 +25,10 @@ public final class UserBid {
     @Override
     public boolean equals(Object other){
         if (this == other) return true;
-        if (!(other instanceof UserBid)) return false;
-        UserBid otherUserBid = (UserBid)other;
-        if (this.getBid() != otherUserBid.getBid()) return false;
-        if (!this.getUser().equals(otherUserBid.getUser())) return false;
+        if (!(other instanceof UserBidTransferObject)) return false;
+        UserBidTransferObject otherUserBidTransferObject = (UserBidTransferObject)other;
+        if (this.getBid() != otherUserBidTransferObject.getBid()) return false;
+        if (!this.getUser().equals(otherUserBidTransferObject.getUser())) return false;
         return true;
     }
 
@@ -40,6 +42,6 @@ public final class UserBid {
 
     @Override
     public String toString(){
-        return String.format("UserBid(%s, %lf)", getUser().getUsername(), getBid());
+        return String.format("UserBidTransferObject(%s, %lf)", getUser().getUsername(), getBid());
     }
 }

@@ -1,11 +1,12 @@
 package com.epam.training.auction.common;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * Created by Ahmed Magdy <ahmed_magdy@epam.com> on 28.10.15.
  */
-public final class AuctionTransferObject {
+public final class AuctionTransferObject implements Serializable {
 
     private long id;
     private String title;
@@ -30,14 +31,14 @@ public final class AuctionTransferObject {
         if (!(other instanceof AuctionTransferObject)) return false;
         AuctionTransferObject otherAuction = (AuctionTransferObject)other;
         if (this.getId() != otherAuction.getId()) return false;
-        if (!this.getTitle().equals(otherAuction.getTitle())) return false;
-        if (!this.getDescription().equals(otherAuction.getDescription())) return false;
+        if (!CommonUtils.areTwoObjectsEqual(this.getTitle(), otherAuction.getTitle())) return false;
+        if (!CommonUtils.areTwoObjectsEqual(this.getDescription(), otherAuction.getDescription())) return false;
         if (this.isActive() != otherAuction.isActive()) return false;
-        if (!this.getSeller().equals(otherAuction.getSeller())) return false;
-        if (!this.getWinner().equals(otherAuction.getWinner())) return false;
+        if (!CommonUtils.areTwoObjectsEqual(this.getSeller(), otherAuction.getSeller())) return false;
+        if (!CommonUtils.areTwoObjectsEqual(this.getWinner(), otherAuction.getWinner())) return false;
         if (this.getFinalPrice() != otherAuction.getFinalPrice()) return false;
-        if (!this.getCreatedAt().equals(otherAuction.getCreatedAt())) return false;
-        if (!this.getUpdatedAt().equals(otherAuction.getUpdatedAt())) return false;
+        if (!CommonUtils.areTwoObjectsEqual(this.getCreatedAt(), otherAuction.getCreatedAt())) return false;
+        if (!CommonUtils.areTwoObjectsEqual(this.getUpdatedAt(), otherAuction.getUpdatedAt())) return false;
         return true;
     }
 
@@ -47,14 +48,14 @@ public final class AuctionTransferObject {
         if (cachedHashCode != 0) return cachedHashCode;
         cachedHashCode = 13;
         cachedHashCode +=  17 * this.getId();
-        cachedHashCode +=  17 * this.getTitle().hashCode();
-        cachedHashCode +=  23 * this.getDescription().hashCode();
+        cachedHashCode +=  17 * CommonUtils.getHashCode(this.getTitle());
+        cachedHashCode +=  23 * CommonUtils.getHashCode(this.getDescription());
         cachedHashCode +=  29 * (this.isActive() ? 1 : 0);
-        cachedHashCode +=  31 * this.getSeller().hashCode();
-        cachedHashCode +=  37 * this.getWinner().hashCode();
-        cachedHashCode +=  41 * Double.valueOf(this.getFinalPrice()).hashCode();
-        cachedHashCode +=  43 * this.getCreatedAt().hashCode();
-        cachedHashCode +=  47 * this.getUpdatedAt().hashCode();
+        cachedHashCode +=  31 * CommonUtils.getHashCode(this.getSeller());
+        cachedHashCode +=  37 * CommonUtils.getHashCode(this.getWinner());
+        cachedHashCode += 41 * Double.valueOf(this.getFinalPrice()).hashCode();
+        cachedHashCode +=  43 * CommonUtils.getHashCode(this.getCreatedAt());
+        cachedHashCode +=  47 * CommonUtils.getHashCode(this.getUpdatedAt());
         return cachedHashCode;
     }
 
