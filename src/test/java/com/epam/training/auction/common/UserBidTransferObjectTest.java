@@ -11,7 +11,7 @@ public class UserBidTransferObjectTest {
     @Test
     public void testEquality(){
         UserTransferObject user = new UserTransferObject(1, "user", "pass");
-        double bid = 11.0;
+        long bid = 11;
         UserBidTransferObject target = new UserBidTransferObject(user, bid);
 
         assertEquals("User is not set correctly", user, target.getUser());
