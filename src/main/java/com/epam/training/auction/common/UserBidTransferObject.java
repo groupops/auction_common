@@ -7,14 +7,14 @@ import java.io.Serializable;
  */
 public final class UserBidTransferObject implements Serializable {
     private UserTransferObject user;
-    private double bid;
+    private long bid;
 
-    public UserBidTransferObject(UserTransferObject user, double bid){
+    public UserBidTransferObject(UserTransferObject user, long bid){
         this.user = user;
         this.bid = bid;
     }
 
-    public double getBid(){
+    public long getBid(){
         return bid;
     }
 
@@ -42,6 +42,6 @@ public final class UserBidTransferObject implements Serializable {
 
     @Override
     public String toString(){
-        return String.format("UserBidTransferObject(%s, %lf)", getUser().getUsername(), getBid());
+        return String.format("UserBidTransferObject(%s, %d)", getUser().getUsername(), getBid());
     }
 }
