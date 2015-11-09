@@ -3,6 +3,9 @@ package com.epam.training.auction.common;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import static com.epam.training.auction.common.CommonUtils.areTwoObjectsEqual;
+import static com.epam.training.auction.common.CommonUtils.getHashCode;
+
 /**
  * Created by Ahmed Magdy <ahmed_magdy@epam.com> on 28.10.15.
  */
@@ -31,14 +34,14 @@ public final class AuctionTransferObject implements Serializable {
         if (!(other instanceof AuctionTransferObject)) return false;
         AuctionTransferObject otherAuction = (AuctionTransferObject)other;
         if (this.getId() != otherAuction.getId()) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getTitle(), otherAuction.getTitle())) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getDescription(), otherAuction.getDescription())) return false;
+        if (!areTwoObjectsEqual(this.getTitle(), otherAuction.getTitle())) return false;
+        if (!areTwoObjectsEqual(this.getDescription(), otherAuction.getDescription())) return false;
         if (this.isActive() != otherAuction.isActive()) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getSeller(), otherAuction.getSeller())) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getWinner(), otherAuction.getWinner())) return false;
+        if (!areTwoObjectsEqual(this.getSeller(), otherAuction.getSeller())) return false;
+        if (!areTwoObjectsEqual(this.getWinner(), otherAuction.getWinner())) return false;
         if (this.getFinalPrice() != otherAuction.getFinalPrice()) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getCreatedAt(), otherAuction.getCreatedAt())) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getUpdatedAt(), otherAuction.getUpdatedAt())) return false;
+        if (!areTwoObjectsEqual(this.getCreatedAt(), otherAuction.getCreatedAt())) return false;
+        if (!areTwoObjectsEqual(this.getUpdatedAt(), otherAuction.getUpdatedAt())) return false;
         return true;
     }
 
@@ -48,14 +51,14 @@ public final class AuctionTransferObject implements Serializable {
         if (cachedHashCode != 0) return cachedHashCode;
         cachedHashCode = 13;
         cachedHashCode +=  17 * this.getId();
-        cachedHashCode +=  17 * CommonUtils.getHashCode(this.getTitle());
-        cachedHashCode +=  23 * CommonUtils.getHashCode(this.getDescription());
+        cachedHashCode +=  17 * getHashCode(this.getTitle());
+        cachedHashCode +=  23 * getHashCode(this.getDescription());
         cachedHashCode +=  29 * (this.isActive() ? 1 : 0);
-        cachedHashCode +=  31 * CommonUtils.getHashCode(this.getSeller());
-        cachedHashCode +=  37 * CommonUtils.getHashCode(this.getWinner());
+        cachedHashCode +=  31 * getHashCode(this.getSeller());
+        cachedHashCode +=  37 * getHashCode(this.getWinner());
         cachedHashCode += 41 * Double.valueOf(this.getFinalPrice()).hashCode();
-        cachedHashCode +=  43 * CommonUtils.getHashCode(this.getCreatedAt());
-        cachedHashCode +=  47 * CommonUtils.getHashCode(this.getUpdatedAt());
+        cachedHashCode +=  43 * getHashCode(this.getCreatedAt());
+        cachedHashCode +=  47 * getHashCode(this.getUpdatedAt());
         return cachedHashCode;
     }
 
@@ -176,7 +179,6 @@ public final class AuctionTransferObject implements Serializable {
     }
 
     public static AuctionBuilder getBuilder(String title, UserTransferObject seller) {
-        AuctionBuilder builder = new AuctionBuilder(title, seller);
-        return builder;
+        return new AuctionBuilder(title, seller);
     }
 }

@@ -7,7 +7,7 @@ import java.util.Optional;
  * Created by Ahmed Magdy <ahmed_magdy@epam.com> on 29.10.15.
  */
 public interface UsersService extends Serializable {
-    void addUser(UserTransferObject user);
+    boolean addUser(UserTransferObject user);
 
     Optional<UserTransferObject> getUserByName(String userName);
 
