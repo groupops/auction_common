@@ -23,21 +23,22 @@ public final class UserBidTransferObject implements Serializable {
     }
 
     @Override
-    public boolean equals(Object other){
-        if (this == other) return true;
-        if (!(other instanceof UserBidTransferObject)) return false;
-        UserBidTransferObject otherUserBidTransferObject = (UserBidTransferObject)other;
-        if (this.getBid() != otherUserBidTransferObject.getBid()) return false;
-        if (!this.getUser().equals(otherUserBidTransferObject.getUser())) return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserBidTransferObject that = (UserBidTransferObject) o;
+
+        if (bid != that.bid) return false;
+        return !(user != null ? !user.equals(that.user) : that.user != null);
+
     }
 
     @Override
-    public int hashCode(){
-        int code = 17;
-        code += 19 * Double.valueOf(getBid()).hashCode();
-        code += 23 * getUser().hashCode();
-        return code;
+    public int hashCode() {
+        int result = user != null ? user.hashCode() : 0;
+        result = 31 * result + (int) (bid ^ (bid >>> 32));
+        return result;
     }
 
     @Override

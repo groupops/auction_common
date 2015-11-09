@@ -1,7 +1,6 @@
 package com.epam.training.auction.common;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 /**
  * Created by Ahmed Magdy <ahmed_magdy@epam.com> on 28.10.15.
@@ -19,7 +18,6 @@ public final class UserTransferObject implements Serializable {
     }
 
     public UserTransferObject(String username, String password){
-        this.id = 0;
         this.username = username;
         this.password = password;
     }
@@ -38,22 +36,24 @@ public final class UserTransferObject implements Serializable {
 
 
     @Override
-    public boolean equals(Object other){
-        if (!(other instanceof UserTransferObject)) return false;
-        UserTransferObject otherUser = (UserTransferObject)other;
-        if (id != otherUser.id) return false;
-        if (!CommonUtils.areTwoObjectsEqual(username, otherUser.username)) return false;
-        if (!CommonUtils.areTwoObjectsEqual(password, otherUser.password)) return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserTransferObject that = (UserTransferObject) o;
+
+        if (id != that.id) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        return !(password != null ? !password.equals(that.password) : that.password != null);
+
     }
 
     @Override
-    public int hashCode(){
-        int code = 31;
-        code += 17 * id;
-        code += 19 * username.hashCode();
-        code += 23 * password.hashCode();
-        return code;
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        return result;
     }
 
     @Override

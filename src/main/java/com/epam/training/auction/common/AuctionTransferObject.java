@@ -26,37 +26,41 @@ public final class AuctionTransferObject implements Serializable {
     }
 
     @Override
-    public boolean equals(Object other){
-        if (this == other) return true;
-        if (!(other instanceof AuctionTransferObject)) return false;
-        AuctionTransferObject otherAuction = (AuctionTransferObject)other;
-        if (this.getId() != otherAuction.getId()) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getTitle(), otherAuction.getTitle())) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getDescription(), otherAuction.getDescription())) return false;
-        if (this.isActive() != otherAuction.isActive()) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getSeller(), otherAuction.getSeller())) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getWinner(), otherAuction.getWinner())) return false;
-        if (this.getFinalPrice() != otherAuction.getFinalPrice()) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getCreatedAt(), otherAuction.getCreatedAt())) return false;
-        if (!CommonUtils.areTwoObjectsEqual(this.getUpdatedAt(), otherAuction.getUpdatedAt())) return false;
-        return true;
+    public boolean equals(Object auction) {
+        if (this == auction) return true;
+        if (auction == null || getClass() != auction.getClass()) return false;
+
+        AuctionTransferObject that = (AuctionTransferObject) auction;
+
+        if (id != that.id) return false;
+        if (isActive != that.isActive) return false;
+        if (Double.compare(that.finalPrice, finalPrice) != 0) return false;
+        if (cachedHashCode != that.cachedHashCode) return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (seller != null ? !seller.equals(that.seller) : that.seller != null) return false;
+        if (winner != null ? !winner.equals(that.winner) : that.winner != null) return false;
+        if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
+        return !(updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null);
+
     }
 
-
     @Override
-    public int hashCode(){
-        if (cachedHashCode != 0) return cachedHashCode;
-        cachedHashCode = 13;
-        cachedHashCode +=  17 * this.getId();
-        cachedHashCode +=  17 * CommonUtils.getHashCode(this.getTitle());
-        cachedHashCode +=  23 * CommonUtils.getHashCode(this.getDescription());
-        cachedHashCode +=  29 * (this.isActive() ? 1 : 0);
-        cachedHashCode +=  31 * CommonUtils.getHashCode(this.getSeller());
-        cachedHashCode +=  37 * CommonUtils.getHashCode(this.getWinner());
-        cachedHashCode += 41 * Double.valueOf(this.getFinalPrice()).hashCode();
-        cachedHashCode +=  43 * CommonUtils.getHashCode(this.getCreatedAt());
-        cachedHashCode +=  47 * CommonUtils.getHashCode(this.getUpdatedAt());
-        return cachedHashCode;
+    public int hashCode() {
+        int result;
+        long temp;
+        result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (isActive ? 1 : 0);
+        result = 31 * result + (seller != null ? seller.hashCode() : 0);
+        result = 31 * result + (winner != null ? winner.hashCode() : 0);
+        temp = Double.doubleToLongBits(finalPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+        result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
+        result = 31 * result + cachedHashCode;
+        return result;
     }
 
     @Override
@@ -176,7 +180,6 @@ public final class AuctionTransferObject implements Serializable {
     }
 
     public static AuctionBuilder getBuilder(String title, UserTransferObject seller) {
-        AuctionBuilder builder = new AuctionBuilder(title, seller);
-        return builder;
+        return new AuctionBuilder(title, seller);
     }
 }

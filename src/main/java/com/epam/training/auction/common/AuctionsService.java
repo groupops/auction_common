@@ -8,13 +8,15 @@ import java.util.Optional;
  * Created by Ahmed Magdy <ahmed_magdy@epam.com> on 29.10.15.
  */
 public interface AuctionsService extends Serializable {
+    /**
+     *
+     * @return created auction id
+     */
+    Long addAuction(AuctionTransferObject auction);
 
     List<AuctionTransferObject> getActiveAuctions();
 
     List<AuctionTransferObject> getArchivedAuctions();
 
-    void addAuction(AuctionTransferObject auction);
-
     Optional<AuctionTransferObject> getAuctionById(long auctionId);
-
 }
