@@ -65,7 +65,7 @@ public final class AuctionTransferObject implements Serializable {
 
     @Override
     public String toString(){
-        return String.format("Auction(id: %ld, title: %s, active: %s)", id, title, (isActive ? "Yes" : "No"));
+        return String.format("Auction(id: %d, title: %s, active: %s)", id, title, (isActive ? "Yes" : "No"));
     }
 
     public String getDescription() {
