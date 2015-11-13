@@ -10,11 +10,13 @@ public class UserBidTransferObjectTest {
 
     @Test
     public void testEquality(){
-        UserTransferObject user = new UserTransferObject(1, "user", "pass");
+        UserTransferObject user = new UserTransferObject("user", "pass");
         long bid = 11;
-        UserBidTransferObject target = new UserBidTransferObject(user, bid);
+        long auctionId = 123;
+        UserBidTransferObject target = new UserBidTransferObject(user, auctionId, bid);
 
         assertEquals("User is not set correctly", user, target.getUser());
         assertTrue("Bid is not set correctly", bid == target.getBid());
+        assertTrue("Auction id is not set correctly", auctionId == target.getAuctionId());
     }
 }

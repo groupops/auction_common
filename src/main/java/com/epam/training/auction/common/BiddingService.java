@@ -9,6 +9,6 @@ public interface BiddingService extends Serializable {
 
     UserBidTransferObject getMaxBid(long auctionId);
 
-    void bid(long auctionId, long bidPrice, long userId) throws BiddingRaceException;
+    boolean bid(UserBidTransferObject bid) throws BiddingRaceException;
 
 }
