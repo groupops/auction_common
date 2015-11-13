@@ -8,14 +8,20 @@ import java.io.Serializable;
 public final class UserBidTransferObject implements Serializable {
     private UserTransferObject user;
     private long bid;
+    private long auctionId;
 
-    public UserBidTransferObject(UserTransferObject user, long bid){
+    public UserBidTransferObject(UserTransferObject user, long auctionId, long bid){
         this.user = user;
+        this.auctionId = auctionId;
         this.bid = bid;
     }
 
     public long getBid(){
         return bid;
+    }
+
+    public long getAuctionId() {
+        return auctionId;
     }
 
     public UserTransferObject getUser(){
