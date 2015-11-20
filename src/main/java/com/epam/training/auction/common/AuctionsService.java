@@ -13,9 +13,7 @@ public interface AuctionsService extends Serializable {
      */
     Long addAuction(AuctionTransferObject auction);
 
-    List<AuctionTransferObject> getActiveAuctions();
-
-    List<AuctionTransferObject> getArchivedAuctions();
+    List<AuctionTransferObject> getAuctionsWithActive(boolean isActive);
 
     AuctionTransferObject getAuctionById(long auctionId);
 }
