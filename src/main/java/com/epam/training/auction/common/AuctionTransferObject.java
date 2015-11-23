@@ -120,15 +120,8 @@ public final class AuctionTransferObject implements Serializable {
 
 
         private AuctionBuilder(String title, UserTransferObject seller){
-            this.id = 0;
             this.title = title;
-            this.description = "";
-            this.isActive = true;
             this.seller = seller;
-            this.winner = null;
-            this.finalPrice = 0.0;
-            this.createdAt = LocalDateTime.now();
-            this.updatedAt = null;
         }
 
         public AuctionBuilder setId(long id){
